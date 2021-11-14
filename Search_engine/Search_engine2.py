@@ -68,25 +68,26 @@ def readIndex():
     return voc 
     
 def cosineVectors(query,index,voc,vocI,k):
+    # This function computes the cosine similarity between query and each document
     doc={}
     llen=len(os.listdir("/content/drive/My Drive/ADM-HW3/HW3/preprocessed_files"))
-    #it creates an array of dimension k
+    # It creates an array of dimension k
     li=[]
-    #it creates the min heap
+    # It creates the min heap
     heapq.heapify(li)
-    #it preprocess the query
+    # It preprocess the query
     query=first(query)
-    #it creates the vector that corrisponds to the query 
+    # It creates the vector that corresponds to the query 
     for word_voc in voc.getKeys():
         doc[voc.myget(word_voc)]=0
-    #it add the words in the vector
+    # It add the words in the vector
     for word in query:
-        #it gets the id_term
+        # It gets the id_term
         word=voc.myget(word)
         doc[word]=doc[word]+1
-    #it sorts the array
+    # It sorts the array
     vec=sorted(np.asarray(list(doc.items())),key=lambda x: x[0])
-    #it creates the frequency of each word in the query
+    # It creates the frequency of each word in the query
     for pos in range(len(vec)):
             #tf * idf(t)
             valuetf=vec[pos][1]/len(query)
